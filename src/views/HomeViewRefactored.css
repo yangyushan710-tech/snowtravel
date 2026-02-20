@@ -1,0 +1,43 @@
+.home-page {
+  width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding: 48px 40px;
+}
+
+.section-inner {
+  width: 1120px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 24px;
+}
+
+.section-title-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.section-title-image {
+  width: 181px;
+  height: 66.8px;
+  object-fit: contain;
+}

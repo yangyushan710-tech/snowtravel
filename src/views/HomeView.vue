@@ -45,118 +45,12 @@
         </div>
 </header>
         <!-- 搜索栏 -->
-        <div class="search-bar-wrap">
-          <div class="search-title">
-            <img src="/image/Frame 1597884340.png" alt="你在寻找什么？" class="search-title-image" />
-          </div>
-          <div class="search-bar">
-            <div class="search-item location">
-              <img src="/image/Vector (1).png" alt="location" class="search-icon" style="width: 18.7px; height: 18.7px;" />
-              <input type="text" placeholder="定位城市" />
-            </div>
-            <div class="search-item destination">
-              <img src="/image/Vector (1).png" alt="destination" class="search-icon" style="width: 18.7px; height: 18.7px;" />
-              <input type="text" placeholder="目的地" />
-            </div>
-            <div class="search-item checkin">
-              <img src="/image/Vector (2).png" alt="checkin" class="search-icon" style="width: 18.7px; height: 18.7px;" />
-              <input type="text" placeholder="开始日期" v-model="checkinDate" />
-              <img src="/image/Vector (3).png" alt="dropdown" class="dropdown-icon" style="width: 8.8px; height: 5.5px; cursor: pointer; position: absolute; right: 12px;" @click="toggleDateDropdown('checkin')" />
-              <div v-if="showDateDropdown === 'checkin'" class="date-dropdown">
-                <div class="date-picker">
-                  <p class="dropdown-title">游玩开始时间</p>
-                  <div class="date-selector">
-                    <div class="year-month-selector">
-                      <select v-model="selectedYear" class="date-select">
-                        <option v-for="year in years" :key="year" :value="year">{{ year }}年</option>
-                      </select>
-                      <select v-model="selectedMonth" class="date-select">
-                        <option v-for="month in 12" :key="month" :value="month">{{ month }}月</option>
-                      </select>
-                    </div>
-                    <div class="date-grid">
-                      <div v-for="i in 30" :key="'checkin-' + i" class="date-item" @click="selectDate('checkin', i)">
-                        {{ i }}日
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="search-item checkout">
-              <img src="/image/Vector (2).png" alt="checkout" class="search-icon" style="width: 18.7px; height: 18.7px;" />
-              <input type="text" placeholder="结束日期" v-model="checkoutDate" />
-              <img src="/image/Vector (3).png" alt="dropdown" class="dropdown-icon" style="width: 8.8px; height: 5.5px; cursor: pointer; position: absolute; right: 12px;" @click="toggleDateDropdown('checkout')" />
-              <div v-if="showDateDropdown === 'checkout'" class="date-dropdown">
-                <div class="date-picker">
-                  <p class="dropdown-title">游玩结束日期</p>
-                  <div class="date-selector">
-                    <div class="year-month-selector">
-                      <select v-model="selectedYear" class="date-select">
-                        <option v-for="year in years" :key="year" :value="year">{{ year }}年</option>
-                      </select>
-                      <select v-model="selectedMonth" class="date-select">
-                        <option v-for="month in 12" :key="month" :value="month">{{ month }}月</option>
-                      </select>
-                    </div>
-                    <div class="date-grid">
-                      <div v-for="i in 30" :key="'checkout-' + i" class="date-item" @click="selectDate('checkout', i)">
-                        {{ i }}日
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="search-item people">
-              <input type="text" placeholder="人数" v-model="peopleCount" />
-              <img src="/image/Vector (3).png" alt="dropdown" class="dropdown-icon" style="width: 8.8px; height: 5.5px; cursor: pointer; position: absolute; right: 12px;" @click="togglePeopleDropdown" />
-              <div v-if="showPeopleDropdown" class="people-dropdown">
-                <div class="people-picker">
-                  <p class="dropdown-title">选择人数</p>
-                  <div class="people-grid">
-                    <div v-for="i in 15" :key="'people-' + i" class="people-item" @click="selectPeople(i)">
-                      {{ i }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button class="search-btn">启程</button>
-          </div>
-        </div>
+        <SearchBar @search-results="handleSearchResults" />
+        <SearchResults :results="searchResults" :searched="searched" @book="handleBook" />
       
 
       <!-- TRAVEL GUIDE 旅行指南 -->
-      <section class="section travel-guide">
-        <div class="section-inner">
-          <div class="section-title-container">
-            <img src="/image/Group 1410084060.png" alt="TRAVEL GUIDE" class="section-title-image" />
-          </div>
-          <div class="carousel-wrap">
-            <transition-group name="carousel" tag="div" class="cards-carousel">
-              <div class="guide-card" v-for="(item, i) in displayCards" :key="item.img" :class="{ active: i === 2 }">
-                <div class="card-img" :style="{ backgroundImage: `url('${item.img}')` }">
-                  <div class="card-info" v-if="i === 2">
-                    <img src="/image/dingwei-6 1.png" alt="定位" class="location-icon" />
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.desc }}</p>
-                  </div>
-                </div>
-              </div>
-            </transition-group>
-            <div class="carousel-controls">
-              <button class="carousel-btn prev" @click="guidePrev">
-                <img src="/image/Group 1410084043.png" alt="上一页" class="carousel-btn-image" />
-              </button>
-              <button class="carousel-btn next" @click="guideNext">
-                <img src="/image/Group 1410084044.png" alt="下一页" class="carousel-btn-image" />
-              </button>
-              <img src="/image/Group 1410084089.png" alt="AI助手" class="ai-assistant-image" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <TravelGuide />
 
       <!-- RECOMMENDED ROUTE 推荐路线 -->
       <section class="section recommended-route">
@@ -378,20 +272,46 @@
   </template>
   
   <script>
+  import { ref } from 'vue'
+  import SearchBar from '@/components/home/SearchBar.vue'
+  import SearchResults from '@/components/home/SearchResults.vue'
+  import TravelGuide from '@/components/home/TravelGuide.vue'
+  
   export default {
     name: 'HomeView',
-    computed: {
-    displayCards() {
-      const cards = this.guideCards
-      const len = cards.length
-      return [
-        cards[(this.currentGuideIndex - 2 + len) % len],
-        cards[(this.currentGuideIndex - 1 + len) % len],
-        cards[this.currentGuideIndex],
-        cards[(this.currentGuideIndex + 1) % len],
-        cards[(this.currentGuideIndex + 2) % len]
-      ]
+    components: {
+      SearchBar,
+      SearchResults,
+      TravelGuide
     },
+    setup() {
+      const searchResults = ref([])
+      const searched = ref(false)
+      
+      const handleSearchResults = (results) => {
+        searchResults.value = results
+        searched.value = true
+        
+        if (results.length > 0) {
+          console.log('搜索成功，找到', results.length, '个结果')
+        } else {
+          console.log('没有找到符合条件的旅行计划')
+        }
+      }
+      
+      const handleBook = (item) => {
+        console.log('预订:', item)
+        alert(`您选择了: ${item.title}`)
+      }
+      
+      return {
+        searchResults,
+        searched,
+        handleSearchResults,
+        handleBook
+      }
+    },
+    computed: {
     displayTimelineNodes() {
       const nodes = this.timelineNodes
       const len = nodes.length
@@ -414,28 +334,12 @@
       userMenuOpen: false,
       currentBannerIndex: 0,
       bannerTimerId: null,
-      currentGuideIndex: 0,
-      checkinDate: '',
-      checkoutDate: '',
-      peopleCount: '',
-      showDateDropdown: '',
-      showPeopleDropdown: false,
-      selectedYear: 2026,
-      selectedMonth: 2,
-      years: [2026, 2027, 2028, 2029, 2030],
       bannerImages: [
       '/image/Group 1410081960.png',
       '/image/banner2 (1).png',
       '/image/banner3 (1).png',
       '/image/banner3.png',
       '/image/image 2517.png',
-    ],
-    guideCards: [
-      { title: '索菲亚大教堂', desc: '拜占庭风格东正教堂', img: '/image/Mask group (1).png' },
-      { title: '长白山', desc: '天池雪景', img: '/image/Rectangle 34628259.png' },
-      { title: '哈尔滨冰雪大世界', desc: '享受冰雪乐园', img: '/image/Rectangle 34628257.png' },
-      { title: '哈尔滨', desc: '济南出发黑龙江4晚3天跟团游', img: '/image/Rectangle 34628258.png' },
-      { title: '亚布力滑雪场', desc: '中国现代滑雪运动的发源地', img: '/image/Rectangle 34628261.png' },
     ],
     timelineNodes: [
       { date: '2026.12.11', title: '自然奇观:盘锦鞍山 5日', desc: '红海滩&千山风景区&广厦艺术街&辽河湿地' },
@@ -478,27 +382,14 @@ mounted() {
   this.bannerTimerId = setInterval(() => {
       this.currentBannerIndex = (this.currentBannerIndex + 1) % this.bannerImages.length
     }, 15000)
-  
-  this.guideTimerId = setInterval(() => {
-      this.currentGuideIndex = (this.currentGuideIndex + 1) % this.guideCards.length
-    }, 15000)
   },
   beforeUnmount() {
     if (this.bannerTimerId) clearInterval(this.bannerTimerId)
-    if (this.guideTimerId) clearInterval(this.guideTimerId)
   },
     methods: {
       goLogin() {
         this.userMenuOpen = false
         this.$emit('go-login')
-      },
-      guidePrev() {
-        const len = this.guideCards.length
-        this.currentGuideIndex = (this.currentGuideIndex - 1 + len) % len
-      },
-      guideNext() {
-        const len = this.guideCards.length
-        this.currentGuideIndex = (this.currentGuideIndex + 1) % len
       },
       timelinePrev() {
         const len = this.timelineNodes.length
@@ -507,30 +398,6 @@ mounted() {
       timelineNext() {
         const len = this.timelineNodes.length
         this.currentTimelineIndex = (this.currentTimelineIndex + 1) % len
-      },
-      toggleDateDropdown(type) {
-        if (this.showDateDropdown === type) {
-          this.showDateDropdown = ''
-        } else {
-          this.showDateDropdown = type
-          this.showPeopleDropdown = false
-        }
-      },
-      togglePeopleDropdown() {
-        this.showPeopleDropdown = !this.showPeopleDropdown
-        this.showDateDropdown = ''
-      },
-      selectDate(type, day) {
-        if (type === 'checkin') {
-          this.checkinDate = this.selectedYear + '年' + this.selectedMonth + '月' + day + '日'
-        } else {
-          this.checkoutDate = this.selectedYear + '年' + this.selectedMonth + '月' + day + '日'
-        }
-        this.showDateDropdown = ''
-      },
-      selectPeople(count) {
-        this.peopleCount = count
-        this.showPeopleDropdown = false
       },
     },
   }
@@ -719,189 +586,6 @@ mounted() {
     opacity: 1;
     background: #fff;
   }
-  
-  /* Search bar */
-  .search-bar-wrap {
-    position: relative;
-    z-index: 2;
-    width: 1200px;
-    height: 188px;
-    margin: 0 auto 10px;
-    padding: 40px;
-    background: url('/image/image 2518.png') no-repeat center;
-    background-size: cover;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  }
-
-  .search-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: -10px;
-  }
-
-  .search-title-image {
-    width: 332.5px;
-    height: 59px;
-  }
-
-  .search-bar {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .search-item {
-    min-width: 80px;
-    display: flex;
-    align-items: center;
-    background: transparent;
-    border: 1px solid #C5C5C5;
-    border-radius: 4px;
-    padding: 0 12px;
-    height: 41.2px;
-    transition: border-color 0.3s ease;
-  }
-
-  .search-item:focus-within {
-    border: 1px solid #2E8AFF;
-  }
-
-  .search-item.location,
-  .search-item.destination {
-    width: 163.7px;
-  }
-
-  .search-item.checkin,
-  .search-item.checkout {
-    width: 150px;
-  }
-
-  .search-item.people {
-    width: 81.2px;
-  }
-
-  .search-icon {
-    margin-right: 8px;
-    font-size: 14px;
-  }
-
-  .search-item input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    outline: none;
-  }
-
-  .search-btn {
-    width: 81.2px;
-    height: 41.2px;
-    background: #2E8AFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-family: "PingFang SC";
-    font-weight: 500;
-    font-size: 17.5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .dropdown-icon {
-    margin-left: 8px;
-  }
-
-  .date-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 8px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding: 16px;
-    min-width: 200px;
-    z-index: 1000;
-  }
-
-  .people-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 8px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding: 16px;
-    min-width: 120px;
-    z-index: 1000;
-  }
-
-  .dropdown-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #333;
-  }
-
-  .date-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  .year-month-selector {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .date-select {
-    padding: 6px 12px;
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    font-size: 14px;
-    background: #fff;
-    cursor: pointer;
-  }
-
-  .date-select:focus {
-    outline: none;
-    border-color: #1890ff;
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-  }
-
-  .people-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    max-height: 120px;
-    overflow-y: auto;
-  }
-
-  .date-item,
-  .people-item {
-    padding: 8px;
-    text-align: center;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 12.5px;
-  }
-
-  .date-item:hover,
-  .people-item:hover {
-    background-color: #f0f0f0;
-  }
-
-  .search-item {
-    position: relative;
-  }
 
   /* Section common */
   .section {
@@ -935,211 +619,6 @@ mounted() {
   .section-title-image {
     width: 181px;
     height: 66.8px;
-  }
-
-  /* Travel Guide */
-  .travel-guide {
-    background: #fff;
-  }
-  
-  .carousel-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-
-  .carousel-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1400px;
-    margin-top: 10px;
-    position: relative;
-  }
-
-  .carousel-controls .prev {
-    margin-left: 320px;
-  }
-
-  .carousel-controls .next {
-    margin-right: 280px;
-  }
-
-  .decorative-image {
-    position: absolute;
-    right: -50px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 161px;
-    height: 161px;
-  }
-
-  .ai-assistant-image {
-    position: absolute;
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 161px;
-    height: 161px;
-  }
-  
-  .carousel-btn {
-    width: 55px;
-    height: 55px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-  }
-
-  .carousel-btn:hover {
-    transform: scale(1.1);
-  }
-
-  .carousel-btn.prev {
-    margin-right: 20px;
-  }
-
-  .carousel-btn.next {
-    margin-left: 20px;
-  }
-
-  .carousel-btn-image {
-    width: 55px;
-    height: 55px;
-  }
-
-  .cards-carousel {
-    display: flex;
-    gap: 0;
-    position: relative;
-    width: 1200px;
-    justify-content: center;
-    transition: all 0.5s ease-in-out;
-  }
-
-  .guide-card {
-    flex: 0 0 287.5px;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    transition: all 0.5s ease-in-out;
-    cursor: pointer;
-    position: relative;
-    margin-right: -25px;
-    padding: 0;
-    border: none;
-  }
-
-  .guide-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
-    z-index: 10;
-  }
-
-  .guide-card:nth-child(1) {
-    z-index: 1;
-    transform: rotateY(-3deg) translateX(10px) translateY(80px) scale(0.95);
-    height: 288.7px;
-  }
-
-  .guide-card:nth-child(2) {
-    z-index: 2;
-    transform: rotateY(-1.5deg) translateX(5px) translateY(40px) scale(0.98);
-    height: 362.5px;
-  }
-
-  .guide-card:nth-child(3) {
-    z-index: 5;
-    transform: scale(1.02);
-    height: 435px;
-  }
-
-  .guide-card:nth-child(4) {
-    z-index: 2;
-    transform: rotateY(1.5deg) translateX(-5px) translateY(40px) scale(0.98);
-    height: 362.5px;
-  }
-
-  .guide-card:nth-child(5) {
-    z-index: 1;
-    transform: rotateY(3deg) translateX(-10px) translateY(80px) scale(0.95);
-    height: 288.7px;
-  }
-
-  .card-img {
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-
-  .card-info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-    z-index: 10;
-  }
-
-  .guide-card.active .card-info {
-    background: rgba(0,0,0,0.6);
-  }
-
-  .card-info h3 {
-    font-size: 27.5px;
-    font-family: "PingFang SC";
-    margin-bottom: 8px;
-    color: #fff;
-    font-weight: 500;
-  }
-
-  .card-info p {
-    font-size: 15px;
-    font-weight: 200;
-    font-family: "PingFang SC";
-    color: rgba(255,255,255,0.9);
-    line-height: 1.4;
-  }
-
-  .location-icon {
-    width: 51.2px;
-    height: 51.2px;
-    margin-bottom: 10px;
-  }
-
-  /* Transition group styles for smooth carousel */
-  .carousel-enter-active,
-  .carousel-leave-active {
-    transition: all 0.6s ease-in-out;
-  }
-
-  .carousel-enter-from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  .carousel-leave-to {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  .carousel-move {
-    transition: transform 0.6s ease-in-out;
   }
 
   /* Recommended Route */

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const imageDir = path.resolve(__dirname, 'image')
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -27,4 +28,9 @@ export default defineConfig({
       },
     },
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  }
 })
