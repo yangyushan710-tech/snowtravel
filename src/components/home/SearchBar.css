@@ -5,7 +5,6 @@
   padding: 40px;
   background: url('/image/image 2518.png') no-repeat center;
   background-size: cover;
-  border-radius: 16px;
 }
 
 .search-title {
@@ -13,14 +12,18 @@
 }
 
 .search-title-image {
+  display: block;
+  margin: 0 auto;
   width: 332.5px;
   height: 59px;
+  margin-top: -10px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-content: center;
 }
 
 .search-item {
@@ -29,10 +32,15 @@
   display: flex;
   align-items: center;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid #d9d9d9;
   border-radius: 8px;
   padding: 12px 16px;
   position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.search-item:focus-within {
+  border: 1px solid #2E8AFF;
 }
 
 .search-item.location {
@@ -40,6 +48,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.search-item.people {
+  flex: 0 0 100px;
+  min-width: 100px;
+}
+
+.search-item.location,
+.search-item.destination,
+.search-item.checkin,
+.search-item.checkout {
+  flex: 0 0 140px;
+  min-width: 140px;
 }
 
 .search-icon {

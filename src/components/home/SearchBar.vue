@@ -67,7 +67,6 @@
         </div>
       </div>
       <div class="search-item people">
-        <img src="/image/Vector (3).png" alt="people" class="search-icon" />
         <input type="text" placeholder="人数" v-model="peopleCount" readonly />
         <img src="/image/Vector (3).png" alt="dropdown" class="dropdown-icon" @click="togglePeopleDropdown" />
         <div v-if="showPeopleDropdown" class="people-dropdown">
