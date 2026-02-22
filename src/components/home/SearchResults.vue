@@ -59,7 +59,7 @@ export default {
 .search-results-container {
   width: 100%;
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 20px auto 50px;
   padding: 20px;
   background: #f9f9f9;
   border-radius: 12px;

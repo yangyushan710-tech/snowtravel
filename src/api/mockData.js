@@ -60,8 +60,193 @@ export const mockCaptcha = {
 }
 
 export const mockUserProfile = {
-  userId: 'user-123',
-  phone: '138****8888',
+  id: 1,
+  username: '旅行者小明',
   nickname: '旅行达人',
-  avatar: '/image/logo.jpg'
+  avatar: '/image/logo.jpg',
+  email: 'traveler@example.com',
+  phone: '138****8888',
+  bio: '热爱旅行，探索世界的每一个角落',
+  memberLevel: 'VIP',
+  points: 1280,
+  joinDate: '2025-01-15'
+}
+
+export const mockRecommendedRoutes = [
+  {
+    id: 1,
+    title: '经典滑雪路线',
+    description: '适合初学者到中级滑雪爱好者的经典路线',
+    duration: '3天2晚',
+    difficulty: '中等',
+    distance: '120公里',
+    highlights: ['专业滑雪场', '温泉度假', '冰雪乐园'],
+    image: '/image/Rectangle 34628276.png'
+  },
+  {
+    id: 2,
+    title: '冰雪奇缘路线',
+    description: '体验童话般的冰雪世界，适合家庭出游',
+    duration: '4天3晚',
+    difficulty: '轻松',
+    distance: '180公里',
+    highlights: ['冰雪大世界', '雪乡', '雾凇岛'],
+    image: '/image/Rectangle 34628285.png'
+  },
+  {
+    id: 3,
+    title: '极限挑战路线',
+    description: '适合高级滑雪爱好者的极限挑战路线',
+    duration: '5天4晚',
+    difficulty: '困难',
+    distance: '260公里',
+    highlights: ['高级雪道', '野外滑雪', '山地温泉'],
+    image: '/image/Rectangle 34628284.png'
+  }
+]
+
+export const mockHomePageData = {
+  hero: {
+    title: '自在游，安心享',
+    subtitle: '探索冰雪世界的奇妙之旅',
+    image: '/image/welcome.png'
+  },
+  travelGuide: {
+    title: '旅行指南',
+    items: [
+      {
+        id: 1,
+        title: '出行准备',
+        description: '必备物品清单、证件准备',
+        image: '/image/Frame 1597884336.png'
+      },
+      {
+        id: 2,
+        title: '交通指南',
+        description: '机场接送、当地交通',
+        image: '/image/Frame 1597884340.png'
+      },
+      {
+        id: 3,
+        title: '住宿推荐',
+        description: '特色酒店、民宿推荐',
+        image: '/image/Frame 1597884346.png'
+      }
+    ]
+  },
+  recommendedRoutes: mockRecommendedRoutes,
+  scenicSpots: {
+    title: '热门景点',
+    spots: [
+      {
+        id: 1,
+        name: '冰雪大世界',
+        description: '世界最大的冰雪主题乐园',
+        image: '/image/Rectangle 34628276.png',
+        rating: 4.8
+      },
+      {
+        id: 2,
+        name: '雪乡',
+        description: '童话般的冰雪世界',
+        image: '/image/Rectangle 34628285.png',
+        rating: 4.7
+      },
+      {
+        id: 3,
+        name: '长白山',
+        description: '神秘的雪山天池',
+        image: '/image/Rectangle 34628284.png',
+        rating: 4.9
+      }
+    ]
+  },
+  winterActivities: {
+    title: '冬季活动',
+    activities: [
+      {
+        id: 1,
+        name: '滑雪',
+        description: '体验速度与激情',
+        image: '/image/Group 1410084058.png'
+      },
+      {
+        id: 2,
+        name: '冰雕',
+        description: '欣赏精美的冰雕艺术',
+        image: '/image/Group 1410084059.png'
+      },
+      {
+        id: 3,
+        name: '温泉',
+        description: '在冰天雪地中享受温泉',
+        image: '/image/Group 1410084060.png'
+      }
+    ]
+  },
+  travelServices: {
+    title: '出行服务',
+    services: [
+      {
+        id: 1,
+        name: '机票预订',
+        description: '便捷的机票预订服务',
+        icon: '/image/Group 1410084043 (1).png'
+      },
+      {
+        id: 2,
+        name: '酒店预订',
+        description: '精选优质酒店',
+        icon: '/image/Group 1410084044 (1).png'
+      },
+      {
+        id: 3,
+        name: '当地向导',
+        description: '专业的当地向导服务',
+        icon: '/image/Group 1410084043 (1).png'
+      },
+      {
+        id: 4,
+        name: '交通租赁',
+        description: '便捷的交通租赁服务',
+        icon: '/image/Group 1410084044 (1).png'
+      }
+    ]
+  },
+  footer: {
+    logo: '/image/logo.jpg',
+    links: [
+      {
+        title: '关于我们',
+        url: '#'
+      },
+      {
+        title: '联系方式',
+        url: '#'
+      },
+      {
+        title: '服务条款',
+        url: '#'
+      },
+      {
+        title: '隐私政策',
+        url: '#'
+      }
+    ],
+    social: [
+      {
+        name: '微信',
+        icon: '/image/Vector (1).png'
+      },
+      {
+        name: '微博',
+        icon: '/image/Vector (2).png'
+      },
+      {
+        name: '抖音',
+        icon: '/image/douyin 2.png'
+      }
+    ],
+    copyright: '© 2026 冰雪旅行. 保留所有权利.'
+  }
 }

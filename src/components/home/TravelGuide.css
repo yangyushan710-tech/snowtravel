@@ -1,10 +1,13 @@
 .travel-guide {
   background: #fff;
+  margin-bottom: 40px;
 }
 
 .section-title-image {
   width: 181px;
   height: 66.8px;
+  margin-left: 130px;
+  margin-top: 20px;
 }
 
 .carousel-wrap {

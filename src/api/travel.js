@@ -1,10 +1,10 @@
 /**
- * 旅行搜索相关 API
+ * 旅行相关 API
  */
 
-import { mockTravelPlans, mockCityInfo } from './mockData'
+import { mockTravelPlans, mockCityInfo, mockRecommendedRoutes, mockHomePageData, mockUserProfile } from './mockData.js'
 
-const API_BASE_URL = '/api'
+const API_BASE_URL = 'http://test-cn.your-api-server.com/api'
 
 const USE_MOCK_DATA = true
 
@@ -161,6 +161,157 @@ export async function searchTravelPlan(params) {
     return data
   } catch (error) {
     console.error('搜索旅行计划失败:', error)
+    console.error('错误详情:', error.message)
+    throw error
+  }
+}
+
+/**
+ * 获取推荐路线
+ * @returns {Promise<Array>} - 返回推荐路线数组
+ */
+export async function getRecommendedRoutes() {
+  console.log('getRecommendedRoutes 函数被调用')
+  
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return mockRecommendedRoutes
+  }
+  
+  try {
+    const url = `${API_BASE_URL}/routes/recommended`
+    console.log('请求URL:', url)
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+    console.log('响应状态:', response.status)
+    
+    if (!response.ok) {
+      throw new Error(`获取推荐路线失败: ${response.status}`)
+    }
+    
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text()
+      console.error('返回的不是JSON数据:', text.substring(0, 200))
+      throw new Error('后端API未实现，请先启动后端服务')
+    }
+    
+    const data = await response.json()
+    console.log('获取到推荐路线:', data)
+    return data
+  } catch (error) {
+    console.error('获取推荐路线失败:', error)
+    console.error('错误详情:', error.message)
+    throw error
+  }
+}
+
+/**
+ * 获取首页整页数据
+ * @returns {Promise<Object>} - 返回首页整页数据
+ */
+export async function getHomePageData() {
+  console.log('getHomePageData 函数被调用')
+  
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return mockHomePageData
+  }
+  
+  try {
+    const url = `${API_BASE_URL}/home/snow-ice`
+    console.log('请求URL:', url)
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+    console.log('响应状态:', response.status)
+    
+    if (!response.ok) {
+      throw new Error(`获取首页数据失败: ${response.status}`)
+    }
+    
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text()
+      console.error('返回的不是JSON数据:', text.substring(0, 200))
+      throw new Error('后端API未实现，请先启动后端服务')
+    }
+    
+    const data = await response.json()
+    console.log('获取到首页数据:', data)
+    return data
+  } catch (error) {
+    console.error('获取首页数据失败:', error)
+    console.error('错误详情:', error.message)
+    throw error
+  }
+}
+
+/**
+ * 获取用户信息
+ * @param {number} userId - 用户ID
+ * @param {string} [token] - 认证token
+ * @returns {Promise<Object>} - 返回用户信息
+ */
+export async function getUserProfile(userId, token = '') {
+  console.log('getUserProfile 函数被调用')
+  console.log('用户ID:', userId)
+  console.log('Token:', token)
+  
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 800))
+    return mockUserProfile
+  }
+  
+  try {
+    const url = `${API_BASE_URL}/user/profile/${userId}`
+    console.log('请求URL:', url)
+    
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    
+    if (token) {
+      headers['token'] = token
+    }
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: headers
+    })
+    
+    console.log('响应状态:', response.status)
+    
+    if (!response.ok) {
+      throw new Error(`获取用户信息失败: ${response.status}`)
+    }
+    
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text()
+      console.error('返回的不是JSON数据:', text.substring(0, 200))
+      throw new Error('后端API未实现，请先启动后端服务')
+    }
+    
+    const data = await response.json()
+    console.log('获取到用户信息:', data)
+    return data
+  } catch (error) {
+    console.error('获取用户信息失败:', error)
     console.error('错误详情:', error.message)
     throw error
   }
