@@ -10,6 +10,7 @@
 
 .winter-activities-title-img {
   height: 66.8px;
+  margin-left: 40px;
   object-fit: contain;
 }
 
@@ -46,24 +47,17 @@
   justify-content: center;
   padding: 10px 20px 10px 32px;
   background: #2E8AFF;
-  color: #fff;
+  border-radius: 999px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.winter-activities-cta:hover {
-  background: #1a7ae8;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(46,138,255,0.3);
 }
 
 .cta-arrow {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: auto;
   margin-left: 8px;
 }
 
@@ -89,6 +83,7 @@
   min-height: 250.6px;
   object-fit: cover;
   display: block;
+  transition: none;
 }
 
 .winter-activities-main-card:hover .winter-activities-main-img {
@@ -109,12 +104,19 @@
   border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  transition: all 0.3s ease;
 }
 
-.winter-activities-gallery-img:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+.img-down {
+  margin-top: 40px;
+}
+
+.img-up {
+  margin-top: -40px;
+}
+
+.img-full-width {
+  width: auto;
+  margin-right: -36px;
 }
 
 .winter-activities-footer {
@@ -131,18 +133,19 @@
   border-radius: 10px;
   border: none;
   background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 0;
 }
 
-.winter-activities-nav-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.nav-btn-image {
-  width: 100%;
-  height: 100%;
+.winter-activities-nav-btn img {
+  width: 48px;
+  height: 48px;
   object-fit: contain;
+}
+
+.winter-activities-nav-btn.active {
+  background: #2E8AFF;
 }

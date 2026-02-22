@@ -18,16 +18,13 @@
   position: relative;
 }
 
-.footer-logo {
+.footer-logo-img {
   grid-column: 1;
   grid-row: 1;
-}
-
-.footer-logo-img {
   height: 100px;
   width: 100px;
   object-fit: contain;
-  margin-top: -30px;
+  margin-top: -20px;
   margin-left: 80px;
 }
 
@@ -35,7 +32,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 90px;
+  top: 115px;
   width: 100%;
   height: 2px;
   background: #ddd;
@@ -76,7 +73,7 @@
   align-items: flex-end;
   gap: 16px;
   margin-top: 20px;
-  margin-right: 50px;
+  margin-right: 10px;
 }
 
 .social-icons {
@@ -84,14 +81,14 @@
   gap: 24px;
 }
 
+.social-icons a {
+  color: #666;
+  text-decoration: none;
+  font-size: 18px;
+}
+
 .social-icon-img {
   width: 26px;
   height: 26px;
   object-fit: contain;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.social-icon-img:hover {
-  transform: scale(1.1);
 }

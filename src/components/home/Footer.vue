@@ -3,7 +3,7 @@
     <div class="footer-inner">
       <div class="footer-main">
         <div class="footer-logo">
-          <img src="../../image/logo.jpg" alt="logo" class="footer-logo-img" />
+          <img src="/image/logo.jpg" alt="logo" class="footer-logo-img" />
           <div class="footer-logo-divider"></div>
         </div>
         <div class="footer-links">
@@ -28,11 +28,11 @@
         </div>
         <div class="footer-right">
           <div class="social-icons">
-            <img src="../../image/Vector (13).png" alt="Vector 13" class="social-icon-img" />
-            <img src="../../image/Vector (14).png" alt="Vector 14" class="social-icon-img" />
-            <img src="../../image/baidu 1.png" alt="Baidu" class="social-icon-img" />
-            <img src="../../image/douyin 2.png" alt="Douyin" class="social-icon-img" />
-            <img src="../../image/kuaishou 1.png" alt="Kuaishou" class="social-icon-img" />
+            <img src="/image/Vector (13).png" alt="Vector 13" class="social-icon-img" />
+            <img src="/image/Vector (14).png" alt="Vector 14" class="social-icon-img" />
+            <img src="/image/baidu 1.png" alt="Baidu" class="social-icon-img" />
+            <img src="/image/douyin 2.png" alt="Douyin" class="social-icon-img" />
+            <img src="/image/kuaishou 1.png" alt="Kuaishou" class="social-icon-img" />
           </div>
         </div>
       </div>

@@ -15,16 +15,22 @@
           <a href="#" :class="{ active: currentNav === 'home' }" @click.prevent="currentNav = 'home'">首页</a>
           <a href="#" :class="{ active: currentNav === 'category' }" @click.prevent="currentNav = 'category'">分类</a>
         </div>
-        <div class="nav-user" @click="userMenuOpen = !userMenuOpen">
-          <div class="avatar"></div>
-          <span class="user-name">admin</span>
-          <img src="/image/Vector (4).png" alt="arrow" class="arrow" />
-          <div v-if="userMenuOpen" class="user-dropdown">
-            <a href="#" @click.prevent="goLogin">登录</a>
-            <a href="#">消息</a>
-            <a href="#">设置</a>
-            <a href="#">我的行程</a>
-            <a href="#">退出</a>
+        <div class="nav-user">
+          <div v-if="searchBoxOpen" class="search-box">
+            <input type="text" placeholder="搜索..." class="search-input" />
+          </div>
+          <img src="/image/Vector.png" alt="search" class="search-icon" @click.stop="searchBoxOpen = !searchBoxOpen" />
+          <div class="nav-user-info" @click="userMenuOpen = !userMenuOpen">
+            <div class="avatar"></div>
+            <span class="user-name">admin</span>
+            <img src="/image/Vector (4).png" alt="arrow" class="arrow" />
+            <div v-if="userMenuOpen" class="user-dropdown">
+              <a href="#" @click.prevent="goLogin">登录</a>
+              <a href="#">消息</a>
+              <a href="#">设置</a>
+              <a href="#">我的行程</a>
+              <a href="#">退出</a>
+            </div>
           </div>
         </div>
       </nav>
@@ -45,15 +51,18 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { useBannerCarousel } from '@/composables/useBannerCarousel'
 import './HeroSection.css'
 
 export default {
   name: 'HeroSection',
   setup() {
+    const searchBoxOpen = ref(false)
     const { currentBannerIndex, bannerImages, currentNav, userMenuOpen, goLogin } = useBannerCarousel()
     
     return {
+      searchBoxOpen,
       currentBannerIndex,
       bannerImages,
       currentNav,

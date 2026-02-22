@@ -1,0 +1,62 @@
+.travel-services {
+  background: url('/image/image 2522.png') no-repeat center center;
+  background-size: cover;
+  padding: 40px 0;
+  margin-top: 50px;
+}
+
+.travel-services-title-img {
+  width: 181px;
+  height: 66.8px;
+  margin-bottom: 40px;
+  margin-left: 135px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 30px 0px;
+  column-gap: 0px;
+  row-gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 0 60px;
+  transform: translateX(70px);
+}
+
+.service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.service-icon-img {
+  width: 62.5px;
+  height: 62.5px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.service-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.service-desc {
+  font-size: 12.5px;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 150px;
+}

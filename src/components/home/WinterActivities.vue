@@ -1,78 +1,39 @@
 <template>
   <section class="section winter-activities">
+    <div class="winter-activities-header">
+      <img src="/image/Group 1410084059.png" alt="冬季活动标题" class="winter-activities-title-img" />
+    </div>
     <div class="section-inner">
-      <div class="winter-activities-header">
-        <img src="/image/Group 1410084058.png" alt="冬季活动" class="winter-activities-title-img" />
-      </div>
       <div class="winter-activities-content">
         <div class="winter-activities-left">
-          <h2 class="winter-activities-title-cn">冬季活动</h2>
+          <h3 class="winter-activities-title-cn">东北民俗非遗的现代蜕变</h3>
           <p class="winter-activities-desc">
-            东北冬季是体验冰雪文化的绝佳时节，从滑雪到冰雪节庆，从温泉到极光观赏，这里应有尽有。
+            东北民俗与非遗在现代化进程中，通过节庆活化、教育传承和创新设计（如鱼皮画文创）持续焕发生命力，成为中华文化多元一体格局的重要见证。
           </p>
           <button class="winter-activities-cta">
             立即体验
-            <img src="/image/Vector (9).png" alt="arrow" class="cta-arrow" />
+            <img src="/image/Vector (9).png" alt="箭头" class="cta-arrow" />
           </button>
         </div>
         <div class="winter-activities-right">
           <div class="winter-activities-main-card">
-            <img src="/image/Rectangle 34628276.png" alt="冬季活动" class="winter-activities-main-img" />
+            <img src="/image/Rectangle 34628276.png" alt="冬季民俗活动主图" class="winter-activities-main-img" />
           </div>
           <div class="winter-activities-gallery">
-            <img 
-              v-for="(img, index) in activityImages" 
-              :key="index" 
-              :src="img" 
-              alt="冬季活动" 
-              class="winter-activities-gallery-img"
-              :style="{ marginTop: index % 2 === 0 ? '40px' : '0' }"
-            />
+            <img src="/image/Rectangle 34628284.png" alt="冬季活动图片1" class="winter-activities-gallery-img img-up" />
+            <img src="/image/Rectangle 34628285.png" alt="冬季活动图片2" class="winter-activities-gallery-img img-down" />
+            <img src="/image/Rectangle 34628286.png" alt="冬季活动图片3" class="winter-activities-gallery-img img-up img-full-width" />
           </div>
         </div>
-      </div>
-      <div class="winter-activities-footer">
-        <button class="winter-activities-nav-btn prev" @click="activityPrev">
-          <img src="/image/Group 1410084043.png" alt="上一页" class="nav-btn-image" />
-        </button>
-        <button class="winter-activities-nav-btn next" @click="activityNext">
-          <img src="/image/Group 1410084044.png" alt="下一页" class="nav-btn-image" />
-        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { ref } from 'vue'
 import './WinterActivities.css'
 
 export default {
-  name: 'WinterActivities',
-  setup() {
-    const currentActivityIndex = ref(0)
-    
-    const activityImages = [
-      '/image/Rectangle 34628276.png',
-      '/image/Rectangle 34628284.png',
-      '/image/Rectangle 34628285.png',
-      '/image/Rectangle 34628286.png'
-    ]
-    
-    const activityPrev = () => {
-      currentActivityIndex.value = (currentActivityIndex.value - 1 + activityImages.length) % activityImages.length
-    }
-    
-    const activityNext = () => {
-      currentActivityIndex.value = (currentActivityIndex.value + 1) % activityImages.length
-    }
-    
-    return {
-      currentActivityIndex,
-      activityImages,
-      activityPrev,
-      activityNext
-    }
-  }
+  name: 'WinterActivities'
 }
 </script>
