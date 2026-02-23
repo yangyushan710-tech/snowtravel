@@ -2,7 +2,7 @@
  * 旅行相关 API
  */
 
-import { mockTravelPlans, mockCityInfo, mockRecommendedRoutes, mockHomePageData, mockUserProfile } from './mockData.js'
+import { mockTravelPlans, mockCityInfo, mockRecommendedRoutes, mockHomePageData, mockUserProfile, mockRouteDetails } from './mockData.js'
 
 const API_BASE_URL = 'http://test-cn.your-api-server.com/api'
 
@@ -312,6 +312,59 @@ export async function getUserProfile(userId, token = '') {
     return data
   } catch (error) {
     console.error('获取用户信息失败:', error)
+    console.error('错误详情:', error.message)
+    throw error
+  }
+}
+
+/**
+ * 获取路线详情
+ * @param {number} routeId - 路线ID
+ * @returns {Promise<Object>} - 返回路线详情
+ */
+export async function getRouteDetails(routeId) {
+  console.log('getRouteDetails 函数被调用')
+  console.log('路线ID:', routeId)
+  
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 800))
+    const routeDetails = mockRouteDetails[routeId]
+    if (!routeDetails) {
+      throw new Error('路线不存在')
+    }
+    return routeDetails
+  }
+  
+  try {
+    const url = `${API_BASE_URL}/routes/${routeId}`
+    console.log('请求URL:', url)
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    
+    console.log('响应状态:', response.status)
+    
+    if (!response.ok) {
+      throw new Error(`获取路线详情失败: ${response.status}`)
+    }
+    
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text()
+      console.error('返回的不是JSON数据:', text.substring(0, 200))
+      throw new Error('后端API未实现，请先启动后端服务')
+    }
+    
+    const data = await response.json()
+    console.log('获取到路线详情:', data)
+    return data
+  } catch (error) {
+    console.error('获取路线详情失败:', error)
     console.error('错误详情:', error.message)
     throw error
   }

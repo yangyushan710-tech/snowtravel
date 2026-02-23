@@ -127,10 +127,17 @@
 .vector-icon {
   margin-top: 8px;
   text-align: left;
+  cursor: pointer;
 }
 
 .vector-icon-changbai {
   margin-top: 0px;
+  cursor: pointer;
+}
+
+.vector-icon-daxing {
+  margin-top: 0px;
+  cursor: pointer;
 }
 
 .vector-image {

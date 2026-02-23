@@ -203,6 +203,7 @@ export default {
   height:675px;
   margin:0 auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background-color: #e6f7ff;
 }
 .left-panel {
   flex: 1;

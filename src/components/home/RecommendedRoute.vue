@@ -20,7 +20,7 @@
               <img src="/image/Group 1410084043 (1).png" alt="上一页" class="carousel-btn-image" />
             </button>
             <div class="timeline">
-              <div class="timeline-item" v-for="(node, i) in displayTimelineNodes" :key="node.date + i" :class="{ 'middle-item': node.position === 'middle', 'left-item': node.position === 'left', 'right-item': node.position === 'right' }">
+              <div class="timeline-item" v-for="(node, i) in displayTimelineNodes" :key="node.date + i" :class="{ 'middle-item': node.position === 'middle', 'left-item': node.position === 'left', 'right-item': node.position === 'right' }" @click="routeClick(node)">
                 <div class="timeline-top">
                   <template v-if="node.position !== 'middle'">
                     <p class="timeline-title">{{ node.title }}</p>
@@ -90,10 +90,12 @@ export default {
           const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`
           
           return {
+            id: route.id,
             date: formattedDate,
             title: route.title,
             desc: route.description,
-            location: '中国'
+            location: '中国',
+            originalRoute: route
           }
         })
         
@@ -150,6 +152,18 @@ export default {
       startAutoPlay()
     }
     
+    const routeClick = (node) => {
+      console.log('点击了路线:', node)
+      alert('点击了路线: ' + node.title)
+      if (node.id) {
+        // 这里可以添加跳转到路线详情页面的逻辑
+        console.log('跳转到路线详情页面，路线ID:', node.id)
+        // 例如：window.location.href = `/route-detail/${node.id}`
+      } else {
+        console.log('该路线没有ID，无法跳转到详情页')
+      }
+    }
+    
     onMounted(() => {
       fetchRecommendedRoutes()
       startAutoPlay()
@@ -167,7 +181,8 @@ export default {
       timelineNext,
       loading,
       error,
-      fetchRecommendedRoutes
+      fetchRecommendedRoutes,
+      routeClick
     }
   }
 }

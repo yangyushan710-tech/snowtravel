@@ -141,7 +141,7 @@ export default {
     return {
       loginType: 'password', // 登录方式：password 或 sms
       countdown: 0, // 验证码倒计时
-      currentPage: 'home',
+      currentPage: 'login',
       form: {
         phone: '',
         password: '',
@@ -323,6 +323,7 @@ export default {
   height: 675px;
   margin: auto;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background-color: #e6f7ff;
 }
 
 .left-section {

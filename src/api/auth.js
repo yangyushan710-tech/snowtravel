@@ -2,7 +2,7 @@
  * 身份验证相关 API
  */
 
-import { mockCaptcha, mockUserProfile } from './mockData'
+import { mockCaptcha, mockUserProfile, mockPasswordLogin, mockRegister } from './mockData'
 
 const API_BASE_URL = '/api'
 
@@ -45,6 +45,12 @@ export async function getCaptcha(token = '') {
 
 // 用户注册
 export async function register(phone, password, code, token = '') {
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return mockRegister
+  }
+  
   try {
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
@@ -79,6 +85,12 @@ export async function register(phone, password, code, token = '') {
 
 // 密码登录
 export async function loginWithPassword(phone, password, captcha, token = '') {
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 800))
+    return mockPasswordLogin
+  }
+  
   try {
     const response = await fetch(`${API_BASE_URL}/auth/login/password`, {
       method: 'POST',

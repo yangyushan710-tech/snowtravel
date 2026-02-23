@@ -239,8 +239,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #e6f7ff 0%, #b3d9ff 100%);
+  color: #333;
 }
 
 .ai-chat-header h3 {

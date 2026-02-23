@@ -40,19 +40,19 @@
                 </a>
               </template>
               <!-- 菜单项 -->
-              <a href="#" class="menu-item-with-icon">
+              <a href="#" class="menu-item-with-icon" @click.prevent="closeMenu">
                 <img src="/image/jifen-2 1.png" alt="积分" class="menu-icon-img jifen-icon-img" />
                 <span>我的积分</span>
               </a>
-              <a href="#" class="menu-item-with-icon">
+              <a href="#" class="menu-item-with-icon" @click.prevent="closeMenu">
                 <img src="/image/Vector (5).png" alt="订单" class="menu-icon-img order-icon-img" />
                 <span>我的订单</span>
               </a>
-              <a href="#" class="menu-item-with-icon">
+              <a href="#" class="menu-item-with-icon" @click.prevent="closeMenu">
                 <img src="/image/Vector (6).png" alt="钱包" class="menu-icon-img wallet-icon-img" />
                 <span>我的钱包</span>
               </a>
-              <a href="#" class="menu-item-with-icon info-with-divider">
+              <a href="#" class="menu-item-with-icon info-with-divider" @click.prevent="closeMenu">
                 <img src="/image/Vector (7).png" alt="常用信息" class="menu-icon-img info-icon-img" />
                 <span>常用信息</span>
               </a>
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useBannerCarousel } from '@/composables/useBannerCarousel'
 import './HeroSection.css'
 
@@ -93,7 +93,16 @@ export default {
     
     const logout = () => {
       console.log('用户点击了退出登录')
-      // 这里可以添加退出登录的逻辑，比如清除localStorage中的token等
+      // 关闭下拉菜单
+      userMenuOpen.value = false
+      // 清除用户信息
+      userInfo.value = null
+      // 清除localStorage中的token
+      localStorage.removeItem('token')
+      console.log('退出登录成功')
+    }
+    
+    const closeMenu = () => {
       userMenuOpen.value = false
     }
     
@@ -108,7 +117,8 @@ export default {
       userError,
       goLogin,
       fetchUserInfo,
-      logout
+      logout,
+      closeMenu
     }
   }
 }
