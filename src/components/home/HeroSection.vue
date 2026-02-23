@@ -100,6 +100,8 @@ export default {
       // 清除localStorage中的token
       localStorage.removeItem('token')
       console.log('退出登录成功')
+      // 刷新页面，返回登录界面
+      window.location.href = '/'
     }
     
     const closeMenu = () => {

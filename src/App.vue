@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <HomeView v-if="currentPage === 'home'" @go-login="currentPage = 'login'" />
+    <IntangibleHeritageView v-else-if="currentPage === 'heritage'" />
     <div v-else-if="currentPage === 'login'" class="login-container">
     <!-- 左侧背景图片区域 -->
     <div class="left-section">
@@ -132,11 +133,12 @@
 <script>
 import HomeView from './views/HomeView.vue'
 import RegisterView from './views/RegisterView.vue'
+import IntangibleHeritageView from './views/IntangibleHeritageView.vue'
 import { getCaptcha, loginWithPassword, getUserProfile } from './api/auth.js'
 
 export default {
   name: 'App',
-  components: { HomeView, RegisterView },
+  components: { HomeView, RegisterView, IntangibleHeritageView },
   data() {
     return {
       loginType: 'password', // 登录方式：password 或 sms
@@ -162,8 +164,28 @@ export default {
     if (this.loginType === 'password') {
       this.getCaptchaImage()
     }
+    
+    // 监听路由变化
+    window.addEventListener('hashchange', this.handleHashChange)
+    // 初始加载时检查路由
+    this.handleHashChange()
+  },
+  beforeUnmount() {
+    // 移除路由监听器
+    window.removeEventListener('hashchange', this.handleHashChange)
   },
   methods: {
+    // 监听路由变化
+    handleHashChange() {
+      const hash = window.location.hash
+      if (hash === '#/heritage') {
+        this.currentPage = 'heritage'
+      } else if (hash === '#/home') {
+        this.currentPage = 'home'
+      } else {
+        this.currentPage = 'login'
+      }
+    },
     // 切换到注册页面
     goToRegister() {
       this.currentPage = 'register'

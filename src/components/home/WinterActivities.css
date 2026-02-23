@@ -24,7 +24,7 @@
 
 .winter-activities-left {
   flex: 0 0 360px;
-  margin-left: 30px;
+  margin-left: 85px;
 }
 
 .winter-activities-title-cn {
@@ -65,46 +65,33 @@
 .winter-activities-right {
   flex: 1;
   display: flex;
-  align-items: stretch;
-  gap: 16px;
-  justify-content: flex-end;
-}
-
-.winter-activities-main-card {
-  flex: 0 0 189px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
   margin-top: 40px;
 }
 
-.winter-activities-main-img {
-  width: 100%;
-  height: 100%;
-  min-height: 250.6px;
-  object-fit: cover;
-  display: block;
-  transition: none;
-}
-
-.winter-activities-main-card:hover .winter-activities-main-img {
-  transform: none;
-}
-
-.winter-activities-gallery {
+.winter-activities-container {
   display: flex;
-  flex-direction: row;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+}
+
+.winter-activities-grid {
+  display: flex;
+  gap: 15px;
   align-items: center;
   justify-content: flex-end;
+  width: 100%;
 }
 
-.winter-activities-gallery-img {
-  width: 189px;
-  height: 250.6px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+.winter-activities-grid-item {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .img-down {
@@ -112,25 +99,31 @@
 }
 
 .img-up {
-  margin-top: -40px;
+  margin-top: 0;
 }
 
-.img-full-width {
-  width: auto;
-  margin-right: -36px;
+.winter-activities-grid-img {
+  width: 189px;
+  height: 250.6px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
 }
 
-.winter-activities-footer {
-  margin-top: 28px;
+.winter-activities-grid-img-small {
+  width: 94px;
+}
+
+.winter-activities-nav {
   display: flex;
-  justify-content: flex-end;
   gap: 36px;
+  margin-top: 10px;
   margin-right: 120px;
 }
 
 .winter-activities-nav-btn {
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
   border-radius: 10px;
   border: none;
   background: #fff;
@@ -142,11 +135,11 @@
 }
 
 .winter-activities-nav-btn img {
-  width: 48px;
-  height: 48px;
+  width: 55px;
+  height: 55px;
   object-fit: contain;
 }
 
 .winter-activities-nav-btn.active {
-  background: #2E8AFF;
+  background: #fff;
 }
