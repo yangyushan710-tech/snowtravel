@@ -85,6 +85,11 @@
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.winter-activities-grid.sliding {
+  transform: translateX(10px);
 }
 
 .winter-activities-grid-item {
@@ -92,14 +97,56 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: margin-top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s ease, z-index 0s linear;
+  position: relative;
+  z-index: 1;
 }
 
 .img-down {
   margin-top: 40px;
+  transform: translateY(0);
 }
 
 .img-up {
   margin-top: 0;
+  transform: translateY(0);
+}
+
+/* 单个图片的滑动效果 */
+.winter-activities-grid-item.sliding-item {
+  z-index: 2;
+}
+
+/* 单个图片的滑动动画 */
+.winter-activities-grid-item.sliding-item:nth-child(1) {
+  transform: translateX(-100%) scale(0.8);
+  opacity: 0;
+}
+
+.winter-activities-grid-item.sliding-item:nth-child(2) {
+  transform: scale(1.05);
+  opacity: 1;
+  z-index: 3;
+}
+
+.winter-activities-grid-item.sliding-item:nth-child(3) {
+  transform: translateX(50%) scale(0.9);
+  opacity: 0.8;
+}
+
+.winter-activities-grid-item.sliding-item:nth-child(4) {
+  transform: translateX(100%) scale(0.8);
+  opacity: 0.6;
+}
+
+/* 图片过渡效果 */
+.winter-activities-grid-img {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.winter-activities-grid.sliding .winter-activities-grid-img {
+  opacity: 0.8;
+  transform: scale(1.05);
 }
 
 .winter-activities-grid-img {

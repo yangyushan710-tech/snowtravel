@@ -2,7 +2,7 @@
  * 旅行相关 API
  */
 
-import { mockTravelPlans, mockCityInfo, mockRecommendedRoutes, mockHomePageData, mockUserProfile, mockRouteDetails } from './mockData.js'
+import { mockTravelPlans, mockCityInfo, mockRecommendedRoutes, mockHomePageData, mockUserProfile, mockRouteDetails, mockArticles } from './mockData.js'
 
 const API_BASE_URL = 'http://test-cn.your-api-server.com/api'
 
@@ -365,6 +365,64 @@ export async function getRouteDetails(routeId) {
     return data
   } catch (error) {
     console.error('获取路线详情失败:', error)
+    console.error('错误详情:', error.message)
+    throw error
+  }
+}
+
+/**
+ * 获取文章列表
+ * @param {number} page - 页码，默认1
+ * @param {number} pageSize - 每页数量，默认11
+ * @returns {Promise<Array>} - 返回文章列表数组
+ */
+export async function fetchArticles(page = 1, pageSize = 11) {
+  console.log('fetchArticles 函数被调用')
+  console.log('请求参数:', { page, pageSize })
+  
+  if (USE_MOCK_DATA) {
+    console.log('使用模拟数据')
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return mockArticles
+  }
+  
+  try {
+    // 准备请求参数
+    const requestData = {
+      pageSize,
+      page
+    }
+    
+    // 准备请求头
+    const myHeaders = new Headers()
+    myHeaders.append('token', 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3NjQ3NTk4ODIsInVzZXJJcCI6MTYwMTk1MTgwMV0.P-yF7qEFER5WauzPmwHsdhIUYP3DLEJN8B louRg')
+    myHeaders.append('Content-Type', 'application/json')
+    
+    // 发送请求
+    const response = await fetch(`${API_BASE_URL}/articles?page=${page}&size=${pageSize}`, {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    })
+    
+    console.log('响应状态:', response.status)
+    
+    if (!response.ok) {
+      throw new Error(`获取文章列表失败: ${response.status}`)
+    }
+    
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text()
+      console.error('返回的不是JSON数据:', text.substring(0, 200))
+      throw new Error('后端API未实现，请先启动后端服务')
+    }
+    
+    const data = await response.json()
+    console.log('获取到文章列表:', data)
+    return data
+  } catch (error) {
+    console.error('获取文章列表失败:', error)
     console.error('错误详情:', error.message)
     throw error
   }
