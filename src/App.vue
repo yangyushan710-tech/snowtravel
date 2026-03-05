@@ -165,10 +165,18 @@ export default {
       this.getCaptchaImage()
     }
     
+    // 检查localStorage中是否有用户token，如果有，说明用户已经登录
+    const userToken = localStorage.getItem('userToken')
+    if (userToken) {
+      // 用户已经登录，根据当前URL的hash设置currentPage
+      this.handleHashChange()
+    } else {
+      // 用户未登录，默认显示登录页面
+      this.currentPage = 'login'
+    }
+    
     // 监听路由变化
     window.addEventListener('hashchange', this.handleHashChange)
-    // 初始加载时检查路由
-    this.handleHashChange()
   },
   beforeUnmount() {
     // 移除路由监听器
@@ -179,11 +187,32 @@ export default {
     handleHashChange() {
       const hash = window.location.hash
       if (hash === '#/heritage') {
-        this.currentPage = 'heritage'
-      } else if (hash === '#/home') {
-        this.currentPage = 'home'
-      } else {
+        // 检查用户是否已经登录，只有登录后才能访问非遗页面
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+          this.currentPage = 'heritage'
+        } else {
+          this.currentPage = 'login'
+        }
+      } else if (hash === '#/home' || hash === '') {
+        // 如果hash为空，且用户已经登录，默认显示首页
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+          this.currentPage = 'home'
+        } else {
+          this.currentPage = 'login'
+        }
+      } else if (hash === '#/login') {
+        // 如果hash为'#/login'，显示登录页面
         this.currentPage = 'login'
+      } else {
+        // 其他情况，如果用户已经登录，默认显示首页，否则显示登录页面
+        const userToken = localStorage.getItem('userToken')
+        if (userToken) {
+          this.currentPage = 'home'
+        } else {
+          this.currentPage = 'login'
+        }
       }
     },
     // 切换到注册页面
@@ -289,6 +318,8 @@ export default {
           
           alert('登录成功！')
           console.log('用户基本信息:', data.data)
+          // 设置URL hash为'/home'，这样刷新页面时就会停留在首页
+          window.location.hash = '#/home'
           this.currentPage = 'home'
         } else {
           this.errors.password = data.msg || '登录失败'

@@ -178,6 +178,7 @@
 <script>
 import { ref } from 'vue'
 import Footer from '../components/home/Footer.vue'
+import { getArticleDetail } from '../api/heritage.js'
 
 export default {
   name: 'IntangibleHeritageView',
@@ -268,61 +269,18 @@ export default {
       isLoading.value = true
       error.value = null
       try {
-        const response = await fetch(`http://test-cn.your-api-server.com/api/articles/${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ id: id })
-        })
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        
-        const data = await response.json()
+        const data = await getArticleDetail(id)
         articleDetail.value = data
         console.log('文章详情获取成功:', data)
       } catch (err) {
         error.value = err.message
         console.error('获取文章详情失败:', err)
-        // 使用mock数据作为 fallback
-        articleDetail.value = getMockArticleDetail(id)
       } finally {
         isLoading.value = false
       }
     }
     
-    // 生成mock数据
-    const getMockArticleDetail = (id) => {
-      return {
-        id: parseInt(id),
-        title: '东北非遗文化保护与传承',
-        content: '本文详细介绍了东北三省的非物质文化遗产保护现状、面临的挑战以及未来的发展方向。',
-        author: '文化遗产保护专家',
-        publishDate: '2026-02-24',
-        heritageItems: [
-          {
-            id: 1,
-            name: '东北大秧歌',
-            description: '东北大秧歌是一种古老的民间舞蹈形式，具有浓郁的地方特色和文化内涵。',
-            image: '/image/Rectangle 26.png'
-          },
-          {
-            id: 2,
-            name: '长白山放山文化',
-            description: '长白山放山文化是东北地区特有的采参习俗，蕴含着丰富的生态智慧和文化传统。',
-            image: '/image/Rectangle 27.png'
-          },
-          {
-            id: 3,
-            name: '营口木浮雕',
-            description: '营口木浮雕是一种精细的传统雕刻工艺，以其独特的艺术风格和精湛的技艺著称。',
-            image: '/image/Rectangle 28.png'
-          }
-        ]
-      }
-    }
+
     
     // 轮播图导航方法
     const prevHeritageSlide = () => {

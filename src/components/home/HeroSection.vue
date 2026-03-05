@@ -17,9 +17,17 @@
         </div>
         <div class="nav-user">
           <div v-if="searchBoxOpen" class="search-box">
-            <input type="text" placeholder="搜索..." class="search-input" />
+            <input 
+              type="text" 
+              placeholder="搜索..." 
+              class="search-input" 
+              v-model="searchKeyword"
+              @keyup.enter="handleSearch"
+              ref="searchInput"
+            />
+            <button class="search-button" @click="handleSearch">搜索</button>
           </div>
-          <img src="/image/Vector.png" alt="search" class="search-icon" @click.stop="searchBoxOpen = !searchBoxOpen" />
+          <img src="/image/Vector.png" alt="search" class="search-icon" @click.stop="toggleSearchBox" />
           <div class="nav-user-info" @click="userMenuOpen = !userMenuOpen">
             <div class="avatar" v-if="!userInfo">
               <img src="/image/logo.jpg" alt="默认头像" style="width: 100%; height: 100%; border-radius: 50%;" />
@@ -89,7 +97,35 @@ export default {
   name: 'HeroSection',
   setup() {
     const searchBoxOpen = ref(false)
+    const searchKeyword = ref('')
+    const searchInput = ref(null)
     const { currentBannerIndex, bannerImages, currentNav, userMenuOpen, userInfo, userLoading, userError, goLogin, fetchUserInfo } = useBannerCarousel()
+    
+    // 切换搜索框显示/隐藏
+    const toggleSearchBox = async () => {
+      searchBoxOpen.value = !searchBoxOpen.value
+      if (searchBoxOpen.value) {
+        await nextTick()
+        searchInput.value?.focus()
+      }
+    }
+    
+    // 处理搜索
+    const handleSearch = () => {
+      if (searchKeyword.value.trim()) {
+        console.log('搜索关键词:', searchKeyword.value.trim())
+        // 这里可以添加实际的搜索逻辑
+        // 例如：跳转到搜索结果页面或调用搜索API
+        alert(`搜索: ${searchKeyword.value.trim()}`)
+        
+        // 清空搜索框并关闭
+        searchKeyword.value = ''
+        searchBoxOpen.value = false
+      } else {
+        // 如果没有输入关键词，只关闭搜索框
+        searchBoxOpen.value = false
+      }
+    }
     
     const logout = () => {
       console.log('用户点击了退出登录')
@@ -110,6 +146,8 @@ export default {
     
     return {
       searchBoxOpen,
+      searchKeyword,
+      searchInput,
       currentBannerIndex,
       bannerImages,
       currentNav,
@@ -119,6 +157,8 @@ export default {
       userError,
       goLogin,
       fetchUserInfo,
+      toggleSearchBox,
+      handleSearch,
       logout,
       closeMenu
     }
