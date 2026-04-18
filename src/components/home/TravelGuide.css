@@ -361,3 +361,142 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* 专题详情弹窗样式 */
+.subject-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.subject-detail-container {
+  width: 800px;
+  max-width: 95%;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.subject-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #b3d9ff 100%);
+  color: #333;
+}
+
+.subject-detail-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.subject-detail-header .close-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.subject-detail-header .close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.subject-detail-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.subject-images {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.subject-images img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.subject-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subject-desc {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.subject-detail-text {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.subject-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.subject-tags .tag {
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #b3d9ff 100%);
+  color: #333;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.subject-detail-loading {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* 轮播卡片点击效果 */
+.guide-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.guide-card.active:hover {
+  transform: scale(1.02);
+}

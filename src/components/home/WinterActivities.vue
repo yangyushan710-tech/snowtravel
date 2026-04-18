@@ -76,6 +76,9 @@ export default {
   },
   methods: {
     handleExperienceClick() {
+      // 先滚动到顶部
+      window.scrollTo(0, 0)
+      // 然后跳转
       window.location.href = '#/heritage'
     },
     prevSlide() {

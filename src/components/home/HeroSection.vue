@@ -133,11 +133,15 @@ export default {
       userMenuOpen.value = false
       // 清除用户信息
       userInfo.value = null
-      // 清除localStorage中的token
+      // 清除所有用户相关的localStorage数据
+      localStorage.removeItem('userToken')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('userName')
+      localStorage.removeItem('userProfile')
       localStorage.removeItem('token')
       console.log('退出登录成功')
-      // 刷新页面，返回登录界面
-      window.location.href = '/'
+      // 跳转到登录界面
+      window.location.href = '/#/login'
     }
     
     const closeMenu = () => {
