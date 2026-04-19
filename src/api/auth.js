@@ -88,6 +88,13 @@ export async function loginWithPassword(phone, password, captcha, token = '') {
   if (USE_MOCK_DATA) {
     console.log('使用模拟数据')
     await new Promise(resolve => setTimeout(resolve, 800))
+    if (!password || password !== '123456') {
+      return {
+        code: 400,
+        msg: '手机号或密码错误',
+        data: null
+      }
+    }
     return mockPasswordLogin
   }
   

@@ -1,5 +1,23 @@
 <template>
   <div class="app-container">
+    <!-- 雪花容器 -->
+    <div v-if="currentPage === 'login' || currentPage === 'register'" class="snowflakes">
+      <div 
+        v-for="snowflake in snowflakes" 
+        :key="snowflake.id"
+        class="snowflake"
+        :style="{
+          left: snowflake.left + '%',
+          width: snowflake.size + 'px',
+          height: snowflake.size + 'px',
+          animationDuration: snowflake.duration + 's',
+          animationDelay: snowflake.delay + 's',
+          opacity: snowflake.opacity
+        }"
+      >
+        <img src="/image/xuehua (2).png" alt="雪花" />
+      </div>
+    </div>
     <HomeView v-if="currentPage === 'home'" @go-login="currentPage = 'login'" />
     <IntangibleHeritageView v-else-if="currentPage === 'heritage'" />
     <div v-else-if="currentPage === 'login'" class="login-container">
@@ -77,15 +95,8 @@
             <div v-if="errors.password" class="error-message">{{ errors.password }}</div>
           </div>
           
-          <!-- 图形验证码显示 -->
-          <div v-if="loginType === 'password' && captchaImage" class="form-item">
-            <label class="captcha-label">图形验证码</label>
-            <img :src="captchaImage" alt="图形验证码" class="captcha-image" @click="refreshCaptcha" />
-            <span class="captcha-hint">点击刷新</span>
-          </div>
-          
-          <!-- 验证码输入区域 -->
-          <div class="form-item">
+          <!-- 验证码输入区域（仅短信登录时显示） -->
+          <div v-if="loginType === 'sms'" class="form-item">
             <div class="verification-code">
               <img src="/image/Group 1410084140 (1).png" alt="验证码图标" class="input-icon" />
               <img src="/image/Vector 4.png" alt="分隔符" class="vector-icon" />
@@ -113,7 +124,7 @@
           
           <!-- 登录按钮 -->
           <button type="submit" class="login-button">登录</button>
-          
+          <div v-if="loginError" class="error-message" style="margin-top: 12px; text-align: center;">{{ loginError }}</div>
           <!-- 注册链接 -->
             <div class="register-link">
               还没有注册账号？<a href="#" @click.prevent="goToRegister">立即注册</a>
@@ -154,12 +165,17 @@ export default {
         password: '',
         code: ''
       },
+      loginError: '',
       showCodeOnButton: false,
       generatedCode: '',
-      captchaImage: ''
+      captchaImage: '',
+      snowflakes: []
     }
   },
   mounted() {
+    // 生成随机雪花
+    this.createSnowflakes()
+    
     // 组件挂载时获取图形验证码
     if (this.loginType === 'password') {
       this.getCaptchaImage()
@@ -266,8 +282,8 @@ export default {
         isValid = false
       }
       
-      // 验证验证码
-      if (!this.form.code) {
+      // 短信登录时验证验证码
+      if (this.loginType === 'sms' && !this.form.code) {
         this.errors.code = '请输入验证码'
         isValid = false
       }
@@ -277,6 +293,7 @@ export default {
     
     // 处理登录
     handleLogin() {
+      this.loginError = ''
       if (this.validateForm()) {
         this.performLogin()
       }
@@ -322,11 +339,11 @@ export default {
           window.location.hash = '#/home'
           this.currentPage = 'home'
         } else {
-          this.errors.password = data.msg || '登录失败'
+          this.loginError = data.msg || '登录失败'
         }
       } catch (err) {
         console.error('登录错误:', err)
-        this.errors.password = '登录失败，请稍后重试'
+        this.loginError = '登录失败，请稍后重试'
       }
     },
     
@@ -353,10 +370,27 @@ export default {
       alert(`验证码已发送：${code}`)
       console.log('生成的验证码:', code)
       
-      // 30秒后重置按钮
+      // 30 秒后重置按钮
       setTimeout(() => {
         this.showCodeOnButton = false
       }, 30000)
+    },
+    
+    // 生成随机雪花
+    createSnowflakes() {
+      const snowflakeCount = 50 // 雪花数量
+      this.snowflakes = []
+      
+      for (let i = 0; i < snowflakeCount; i++) {
+        this.snowflakes.push({
+          id: i,
+          left: Math.random() * 100, // 随机水平位置 (0-100%)
+          size: Math.random() * 20 + 10, // 随机大小 (10-30px)
+          duration: Math.random() * 5 + 5, // 随机下落时间 (5-10 秒)
+          delay: Math.random() * 5, // 随机延迟 (0-5 秒)
+          opacity: Math.random() * 0.6 + 0.3 // 随机透明度 (0.3-0.8)
+        })
+      }
     }
   }
 }
@@ -368,6 +402,46 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   width: 100vw;
+  background: url('/image/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 雪花容器 */
+.snowflakes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* 单个雪花 */
+.snowflake {
+  position: absolute;
+  top: -50px;
+  animation: snowfall linear infinite;
+}
+
+.snowflake img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
 }
 
 .login-container {
@@ -440,14 +514,14 @@ export default {
 
 .login-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.1rem;
 }
 
 .header-content {
   display: flex;
   flex-direction: row;
   margin-left: 120px;
-  margin-top: 60px;
+  margin-top: 80px;
   align-items: center;
   gap: 8px;
 }
@@ -464,7 +538,7 @@ export default {
 
 .card {
   max-width: 400px;
-  margin: 15px auto;
+  margin: 30px auto 15px auto;
   padding: 24px;
   border-radius: 8px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06);
