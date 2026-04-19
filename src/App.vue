@@ -18,8 +18,9 @@
         <img src="/image/xuehua (2).png" alt="雪花" />
       </div>
     </div>
-    <HomeView v-if="currentPage === 'home'" @go-login="currentPage = 'login'" />
+    <HomeView v-if="currentPage === 'home'" @go-login="currentPage = 'login'" @go-snow-ai="currentPage = 'snowAI'" />
     <IntangibleHeritageView v-else-if="currentPage === 'heritage'" />
+    <SnowTravelAI v-else-if="currentPage === 'snowAI'" @back-home="currentPage = 'home'" />
     <div v-else-if="currentPage === 'login'" class="login-container">
     <!-- 左侧背景图片区域 -->
     <div class="left-section">
@@ -145,11 +146,12 @@
 import HomeView from './views/HomeView.vue'
 import RegisterView from './views/RegisterView.vue'
 import IntangibleHeritageView from './views/IntangibleHeritageView.vue'
+import SnowTravelAI from './components/SnowTravelAI.vue'
 import { getCaptcha, loginWithPassword, getUserProfile } from './api/auth.js'
 
 export default {
   name: 'App',
-  components: { HomeView, RegisterView, IntangibleHeritageView },
+  components: { HomeView, RegisterView, IntangibleHeritageView, SnowTravelAI },
   data() {
     return {
       loginType: 'password', // 登录方式：password 或 sms

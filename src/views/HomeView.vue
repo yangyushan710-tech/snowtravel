@@ -16,7 +16,7 @@
         <SearchResults :results="searchResults" :searched="searched" @book="handleBook" />
         
         <!-- TRAVEL GUIDE 旅行指南 -->
-        <TravelGuide :guideData="homeData.travelGuide" />
+        <TravelGuide :guideData="homeData.travelGuide" @open-snow-ai="$emit('go-snow-ai')" />
 
         <!-- RECOMMENDED ROUTE 推荐路线 -->
         <RecommendedRoute :routesData="homeData.recommendedRoutes" />
