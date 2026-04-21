@@ -1,0 +1,421 @@
+/* App.vue 样式 */
+
+/* 全局变量 */
+:root {
+  --primary-color: #1890ff;
+  --primary-hover: #40a9ff;
+  --primary-light: #478DF7;
+  --background-color: #e6f7ff;
+  --text-color: #333;
+  --text-light: #999;
+  --error-color: #ff4d4f;
+  --input-bg: #F2F4F8;
+  --border-radius: 4px;
+  --box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* 主容器 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  background: url('/image/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 雪花容器 */
+.snowflakes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* 单个雪花 */
+.snowflake {
+  position: absolute;
+  top: -50px;
+  animation: snowfall linear infinite;
+}
+
+.snowflake img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
+}
+
+/* 登录容器 */
+.login-container {
+  display: flex;
+  width: 1200px;
+  height: 675px;
+  margin: auto;
+  box-shadow: var(--box-shadow);
+  background-color: var(--background-color);
+}
+
+/* 左侧背景区域 */
+.left-section {
+  flex: 1;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.left-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.left-header,
+.left-content {
+  position: relative;
+  z-index: 2;
+}
+
+.left-header {
+  text-align: left;
+  margin-left: 8px;
+  margin-top: 70px;
+}
+
+.title {
+  font-size: 43.7px;
+  font-weight: 700;
+  font-family: "HYYakuHei";
+  margin-bottom: 16px;
+}
+
+.sub-title-image {
+  width: 200px;
+  height: 30px;
+}
+
+.left-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 右侧登录表单区域 */
+.right-section {
+  width: 700px;
+  padding: 2rem;
+  background: #fff;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 0.1rem;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  margin-left: 120px;
+  margin-top: 80px;
+  align-items: center;
+  gap: 8px;
+}
+
+.welcome-image {
+  width: 111px;
+  height: 25px;
+}
+
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.card {
+  max-width: 400px;
+  margin: 30px auto 15px auto;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 登录选项卡 */
+.login-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "HYYakuHei";
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* 表单样式 */
+.form-item {
+  margin-bottom: 1rem;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--input-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--input-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.input-with-icon:focus-within,
+.password-input:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+}
+
+.vector-icon {
+  position: absolute;
+  left: 36px;
+  height: 17.5px;
+}
+
+.input-with-icon input,
+.password-input input {
+  width: 338px;
+  height: 37px;
+  padding: 8px 12px 8px 50px;
+  border: none;
+  font-size: 12.5px;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.input-with-icon input:focus,
+.password-input input:focus {
+  outline: none;
+  background: transparent;
+}
+
+.input-with-icon input.error,
+.password-input input.error {
+  border: none;
+}
+
+/* 验证码输入 */
+.verification-code {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.verification-code input {
+  flex: 1;
+  height: 37px;
+  padding: 8px 12px 8px 50px;
+  border: none;
+  font-size: 12.5px;
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.verification-code input:focus {
+  outline: none;
+  background: var(--input-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.verification-code input.error {
+  border: none;
+}
+
+.get-code-btn {
+  width: 110px;
+  height: 37px;
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--input-bg);
+  color: var(--primary-light);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: bold;
+}
+
+.get-code-btn:disabled {
+  background: #f0f0f0;
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+/* 错误信息 */
+.error-message {
+  color: var(--error-color);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* 忘记密码 */
+.forgot-password {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.forgot-password a {
+  color: var(--primary-light);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 12.5px;
+}
+
+/* 登录按钮 */
+.login-button {
+  width: 100%;
+  height: 42px;
+  background: var(--primary-light);
+  color: white;
+  border: none;
+  border-radius: 23px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background: var(--primary-hover);
+}
+
+/* 注册链接 */
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 12.5px;
+  color: var(--text-light);
+}
+
+.register-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* 图形验证码样式 */
+.captcha-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.captcha-image {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+}
+
+.captcha-hint {
+  margin-left: 12px;
+  font-size: 12px;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+/* 返回首页链接 */
+.back-home-wrap {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.back-home-wrap a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-home-wrap a:hover {
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+  
+  .left-section {
+    padding: 2rem;
+  }
+  
+  .right-section {
+    width: 100%;
+  }
+  
+  .input-with-icon input,
+  .password-input input,
+  .verification-code input {
+    width: 100%;
+  }
+}
